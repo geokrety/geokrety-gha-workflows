@@ -1,4 +1,4 @@
-name: Semantic release
+name: Automatic release
 
 on:
   push:
@@ -6,10 +6,10 @@ on:
       - main
 
 jobs:
-  call-pre-commit:
-    uses: ./.github/workflows/pre-commit.yml
-
-  call-semantic-release:
-    uses: ./.github/workflows/semantic-release.yml
-    secrets:
-      token: ${{ secrets.GH_TOKEN }}
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/pre-commit.yml
+      - uses: ./.github/actions/semantic-release.yml
+        with:
+          token: ${{ secrets.GH_TOKEN }}
