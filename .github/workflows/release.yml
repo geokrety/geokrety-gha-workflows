@@ -1,0 +1,15 @@
+name: Semantic release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call-pre-commit:
+    uses: ./.github/workflows/pre-commit.yml
+
+  call-semantic-release:
+    uses: ./.github/workflows/semantic-release.yml
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}
