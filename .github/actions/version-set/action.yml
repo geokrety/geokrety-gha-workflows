@@ -13,6 +13,7 @@ runs:
 
     - name: Get values
       id: vars
+      shell: bash
       run: |
         echo "version=${GITHUB_REF_NAME#v}" | tee -a $GITHUB_OUTPUT
         [ -f source/.versionset ] || { echo ".versionset file missing"; exit 1; }
@@ -43,7 +44,7 @@ runs:
       uses: peter-evans/create-pull-request@v5
       with:
         path: versionset
-        token: ${{ secrets.GH_TOKEN }}
+        token: ${{ inputs.token }}
         add-paths: defaults/versionset.yml
         commit-message: |
           feat: Bump ${{ github.repository }} in version-set to ${{ github.ref_name }}
@@ -59,6 +60,7 @@ runs:
 
     - name: Check outputs
       if: ${{ steps.cpr.outputs.pull-request-number }}
+      shell: bash
       run: |
         echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
         echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
