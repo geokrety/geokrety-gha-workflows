@@ -9,8 +9,19 @@ on:
     inputs:
       image_name:
         type: string
+      dockerhub_username:
+        required: true
+        type: string
+      dockerfile:
+        type: string
+        default: Dockerfile
+      context:
+        type: string
+        default: .
     secrets:
       GH_TOKEN:
+        required: true
+      dockerhub_token:
         required: true
 
 jobs:
@@ -22,10 +33,12 @@ jobs:
     uses: geokrety/geokrety-gha-workflows/.github/workflows/docker-build.yml@main
     with:
       image_name: ${{ inputs.image_name }}
-      dockerhub_username: ${{ vars.DOCKERHUB_USERNAME }}
-      dockerfile: Dockerfile
+      dockerhub_username: ${{ inputs.dockerhub_username }}
+      dockerhub_token: ${{ secrets.dockerhub_token }}
+      dockerfile: ${{ inputs.dockerfile }}
+      context: ${{ inputs.context }}
     secrets:
-      dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
+      dockerhub_token: ${{ secrets.dockerhub_token }}
 
   build-release:
     uses: geokrety/geokrety-gha-workflows/.github/workflows/semantic-release.yml@main
