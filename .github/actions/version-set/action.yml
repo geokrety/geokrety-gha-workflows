@@ -24,6 +24,7 @@ runs:
       with:
         path: 'versionset'
         repository: geokrety/geokrety-ansible
+        ref: 'main'
 
     - name: Update Version-Set
       uses: fjogeleit/yaml-update-action@main
