@@ -1,0 +1,30 @@
+name: pre-commit for PHP code
+
+on:
+  workflow_call:
+    inputs:
+      php_version:
+        type: string
+        default: "7.4"
+      php_cd_fixer_version:
+        type: string
+        default: "3.22.0"
+
+jobs:
+  pre-commit:
+    if: "!contains(github.event.head_commit.message, 'skip ci')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP with composer v2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ inputs.php_version }}
+          tools: composer:v2
+
+      - name: Install php-cs-fixer
+        run: |
+          curl -L "https://github.com/PHP-CS-Fixer/PHP-CS-Fixer/releases/download/v${{ inputs.php_cd_fixer_version }}/php-cs-fixer.phar" -o php-cs-fixer
+          sudo chmod a+x php-cs-fixer && ls -la $HOME
+          sudo mv php-cs-fixer /usr/local/bin/
+
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/pre-commit@main
