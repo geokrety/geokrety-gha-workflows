@@ -2,9 +2,6 @@ name: Automatic release with Dockerfile
 # Use this one for default pre-commit pre-installed tools and a standard dockerfile
 
 on:
-  push:
-    branches:
-      - main
   workflow_call:
     inputs:
       image_name:
@@ -29,12 +26,11 @@ jobs:
     uses: geokrety/geokrety-gha-workflows/.github/workflows/pre-commit.yml@main
 
   docker:
-    needs: pre-commit
     uses: geokrety/geokrety-gha-workflows/.github/workflows/docker-build.yml@main
+    needs: pre-commit
     with:
       image_name: ${{ inputs.image_name }}
       dockerhub_username: ${{ inputs.dockerhub_username }}
-      dockerhub_token: ${{ secrets.dockerhub_token }}
       dockerfile: ${{ inputs.dockerfile }}
       context: ${{ inputs.context }}
     secrets:
