@@ -1,0 +1,16 @@
+name: Automatic release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pre-commit:
+    uses: geokrety/geokrety-gha-workflows/.github/workflows/pre-commit.yml@main
+
+  build-release:
+    uses: geokrety/geokrety-gha-workflows/.github/workflows/semantic-release.yml@main
+    needs: pre-commit
+    secrets:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}
