@@ -18,7 +18,6 @@ on:
     secrets:
       dockerhub_token:
         required: true
-        type: string
 
 jobs:
   docker:
