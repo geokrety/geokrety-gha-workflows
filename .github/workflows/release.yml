@@ -1,4 +1,4 @@
-name: Automatic release
+name: Automatic release with pre-commit
 # Use this one for default pre-commit pre-installed tools
 
 on:
