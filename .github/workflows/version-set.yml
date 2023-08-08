@@ -1,9 +1,10 @@
 name: Update version-set
 
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  workflow_call:
+    secrets:
+      GH_TOKEN:
+        required: true
 
 jobs:
   versionset:
@@ -11,4 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: ./.github/actions/version-set
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/version-set
+        with:
+          token: ${{ secrets.GH_TOKEN }}
