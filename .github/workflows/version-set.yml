@@ -12,6 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: geokrety/geokrety-gha-workflows/.github/actions/version-set
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/version-set@main
         with:
           token: ${{ secrets.GH_TOKEN }}
