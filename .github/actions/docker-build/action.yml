@@ -1,17 +1,21 @@
 name: Docker build
 inputs:
   image_name:
+    description: docker image name
     required: true
     type: string
   dockerhub_username:
-    required: true
+    description: docker hub username
     type: string
   dockerhub_token:
-    required: true
+    description: docker hub token
+    type: string
   dockerfile:
+    description: dockerfile name
     type: string
     default: Dockerfile
   context:
+    description: context path
     type: string
     default: .
 
