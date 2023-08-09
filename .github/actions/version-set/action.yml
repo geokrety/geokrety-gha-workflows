@@ -32,7 +32,7 @@ runs:
         commitChange: false
         createPR: false
         repository: geokrety/geokrety-ansible
-        valueFile: defaults/versionset.yml
+        valueFile: defaults/main/versionset.yml
         changes: |
           {
             "${{ steps.vars.outputs.version_set_name }}.docker_tag": "${{ steps.vars.outputs.version }}",
@@ -46,7 +46,7 @@ runs:
       with:
         path: versionset
         token: ${{ inputs.token }}
-        add-paths: defaults/versionset.yml
+        add-paths: defaults/main/versionset.yml
         commit-message: |
           feat: Bump ${{ github.repository }} in version-set to ${{ github.ref_name }}
         committer: geokrety-bot <geokrety-bot@users.noreply.github.com>
