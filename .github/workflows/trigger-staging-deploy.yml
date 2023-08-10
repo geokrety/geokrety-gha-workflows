@@ -12,7 +12,6 @@ on:
 
 jobs:
   deploy:
-    needs: docker
     if: "!startsWith(github.ref, 'refs/pull/')"
     runs-on: ubuntu-latest
     steps:
