@@ -1,0 +1,23 @@
+name: trigger-staging-deploy
+
+on:
+  workflow_call:
+    secrets:
+      DEPLOY_HEADER_NAME:
+        required: true
+      DEPLOY_HEADER_VALUE:
+        required: true
+      DEPLOY_URL:
+        required: true
+
+jobs:
+  deploy:
+    needs: docker
+    if: "!startsWith(github.ref, 'refs/pull/')"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/deploy-website@main
+        with:
+          header_name: ${{ secrets.DEPLOY_HEADER_NAME }}
+          header_value: ${{ secrets.DEPLOY_HEADER_VALUE }}
+          webhook_endpoint: ${{ secrets.DEPLOY_URL }}
