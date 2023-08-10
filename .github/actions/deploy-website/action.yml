@@ -1,0 +1,16 @@
+name: Deploy staging website
+inputs:
+  header_name:
+    required: true
+  header_value:
+    required: true
+  webhook_endpoint:
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Call webhook
+      shell: bash
+      run: |
+        curl -X POST -H "${{ inputs.header_name }}: ${{ inputs.header_value }}" ${{ inputs.webhook_endpoint }} -H "Content-Type: application/json" -d null
