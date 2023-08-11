@@ -23,6 +23,10 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - uses: geokrety/geokrety-gha-workflows/.github/actions/docker-build@main
         with:
           image_name: ${{ inputs.image_name }}
