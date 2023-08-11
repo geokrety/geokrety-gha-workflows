@@ -18,6 +18,12 @@ inputs:
     description: context path
     type: string
     default: .
+  build_args:
+    type: string
+outputs:
+  tag:
+    description: "Random number"
+    value: ${{ steps.meta.outputs.tags[0] }}
 
 runs:
   using: "composite"
@@ -64,4 +70,4 @@ runs:
         push: ${{ github.event_name != 'pull_request' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        build-args: GIT_COMMIT=${{ steps.vars.outputs.GIT_COMMIT }}
+        build-args: GIT_COMMIT=${{ steps.vars.outputs.GIT_COMMIT }},${{ inputs.build_args }}
