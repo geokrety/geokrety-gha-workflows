@@ -22,7 +22,7 @@ inputs:
     type: string
 outputs:
   tag:
-    description: "Random number"
+    description: "built tag"
     value: ${{ steps.meta.outputs.tags[0] }}
 
 runs:
