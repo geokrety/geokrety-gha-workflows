@@ -1,4 +1,4 @@
-name: Semantic release
+name: Pre-commit
 runs:
   using: "composite"
   steps:

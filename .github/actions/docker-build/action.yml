@@ -20,6 +20,10 @@ inputs:
     default: .
   build_args:
     type: string
+  build_only:
+    type: boolean
+    default: false
+
 outputs:
   tag:
     description: "built tag"
@@ -67,7 +71,7 @@ runs:
       with:
         file: ${{ inputs.dockerfile }}
         context: ${{ inputs.context }}
-        push: ${{ github.event_name != 'pull_request' }}
+        push: ${{ github.event_name != 'pull_request' && inputs.build_only != false }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         build-args: |

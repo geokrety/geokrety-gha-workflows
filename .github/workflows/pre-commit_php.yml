@@ -34,6 +34,6 @@ jobs:
           curl -LSs "https://github.com/hadolint/hadolint/releases/download/v${{ inputs.hadolint_version }}/hadolint-$(uname -s)-$(uname -m)" -o hadolint
           sudo chmod a+x hadolint && ls -la $HOME
           sudo mv hadolint /usr/local/bin/
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: geokrety/geokrety-gha-workflows/.github/actions/pre-commit@main
