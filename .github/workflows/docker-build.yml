@@ -15,6 +15,9 @@ on:
       context:
         type: string
         default: .
+      build_only:
+        type: boolean
+        default: false
     secrets:
       dockerhub_token:
         required: true
@@ -34,3 +37,4 @@ jobs:
           dockerhub_token: ${{ secrets.dockerhub_token }}
           dockerfile: ${{ inputs.dockerfile }}
           context: ${{ inputs.context }}
+          build_only: ${{ inputs.build_only }}
