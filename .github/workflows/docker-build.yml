@@ -15,9 +15,9 @@ on:
       context:
         type: string
         default: .
-      build_only:
+      push:
         type: boolean
-        default: false
+        default: true
     secrets:
       dockerhub_token:
         required: true
@@ -26,6 +26,17 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
+      - name: Debug
+        shell: bash
+        run: |
+          # DEBUG FROM WORKFLOW
+          # github.event_name: ${{ github.event_name }} push
+          # inputs.push: ${{ inputs.push }} true
+          # cond1: ${{ github.event_name != 'pull_request' }} true
+          # cond2: ${{ inputs.push }} false
+          # cond2: ${{ inputs.push == 'true' }} false
+          # result: ${{ github.event_name != 'pull_request' && inputs.push }}
+
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -37,4 +48,4 @@ jobs:
           dockerhub_token: ${{ secrets.dockerhub_token }}
           dockerfile: ${{ inputs.dockerfile }}
           context: ${{ inputs.context }}
-          build_only: ${{ inputs.build_only }}
+          push: ${{ inputs.push }}

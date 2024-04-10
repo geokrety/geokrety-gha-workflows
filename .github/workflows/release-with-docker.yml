@@ -15,6 +15,9 @@ on:
       context:
         type: string
         default: .
+      push:
+        type: boolean
+        default: true
     secrets:
       GH_TOKEN:
         required: true
@@ -33,6 +36,7 @@ jobs:
       dockerhub_username: ${{ inputs.dockerhub_username }}
       dockerfile: ${{ inputs.dockerfile }}
       context: ${{ inputs.context }}
+      push: ${{ inputs.push }}
     secrets:
       dockerhub_token: ${{ secrets.dockerhub_token }}
 

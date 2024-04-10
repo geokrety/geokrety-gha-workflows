@@ -20,9 +20,9 @@ inputs:
     default: .
   build_args:
     type: string
-  build_only:
+  push:
     type: boolean
-    default: false
+    default: true
 
 outputs:
   tag:
@@ -32,6 +32,19 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Debug
+      shell: bash
+      run: |
+        # DEBUG FROM ACTION
+        # github.event_name: ${{ github.event_name }} push
+        # inputs.push: ${{ inputs.push }} true
+        # cond1: ${{ github.event_name != 'pull_request' }} true
+        # cond2: ${{ inputs.push }} false
+        # cond2: ${{ inputs.push == 'true' }} false
+        # cond2: ${{ !inputs.push }} true
+        # cond2: ${{ inputs.push != 'true' }} true
+        # result: ${{ github.event_name != 'pull_request' && inputs.push }}
+
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v4
@@ -71,7 +84,7 @@ runs:
       with:
         file: ${{ inputs.dockerfile }}
         context: ${{ inputs.context }}
-        push: ${{ github.event_name != 'pull_request' && ! inputs.build_only }}
+        push: ${{ github.event_name != 'pull_request' && inputs.push }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         build-args: |
