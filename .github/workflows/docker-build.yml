@@ -48,4 +48,4 @@ jobs:
           dockerhub_token: ${{ secrets.dockerhub_token }}
           dockerfile: ${{ inputs.dockerfile }}
           context: ${{ inputs.context }}
-          push: ${{ inputs.push }}
+          push: ${{ github.event_name != 'pull_request' && inputs.push }}
