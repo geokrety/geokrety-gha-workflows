@@ -27,7 +27,15 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
-        npm i -D js-yaml@4.1.0 conventional-changelog-conventionalcommits@7 semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/exec @semantic-release/changelog @semantic-release/github
+        npm i -D \
+          js-yaml@4.1.0 \
+          conventional-changelog-conventionalcommits@8 \
+          semantic-release@24.0.0-beta.2 \
+          @semantic-release/commit-analyzer \
+          @semantic-release/release-notes-generator \
+          @semantic-release/exec \
+          @semantic-release/changelog \
+          @semantic-release/github
 
     - name: New tag
       env:

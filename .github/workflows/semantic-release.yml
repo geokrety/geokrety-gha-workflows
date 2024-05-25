@@ -12,6 +12,6 @@ jobs:
   build-release:
     runs-on: ubuntu-latest
     steps:
-      - uses: geokrety/geokrety-gha-workflows/.github/actions/semantic-release@main
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/semantic-release@convcom
         with:
           token: ${{ secrets.GH_TOKEN }}
