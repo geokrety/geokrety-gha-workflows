@@ -47,6 +47,9 @@ runs:
         # cond2: ${{ inputs.push != 'true' }} true
         # result: ${{ github.event_name != 'pull_request' && inputs.push }}
 
+    - run: docker image ls
+      shell: bash
+
     - name: Docker meta
       id: meta
       uses: docker/metadata-action@v5
@@ -67,6 +70,8 @@ runs:
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
+      with:
+        driver: docker
 
     - name: Login to Docker Hub
       if: github.event_name != 'pull_request' && inputs.push && inputs.dockerhub_token != ''
@@ -80,6 +85,9 @@ runs:
       shell: bash
       run: |
         echo "GIT_COMMIT=$(git describe --tags)" >> $GITHUB_OUTPUT
+
+    - run: docker image ls
+      shell: bash
 
     - name: Build and push
       uses: docker/build-push-action@v6
