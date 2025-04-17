@@ -88,6 +88,7 @@ runs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
         outputs: type=image
+        load: true
         build-args: |
           GIT_COMMIT=${{ steps.vars.outputs.GIT_COMMIT }}
           ${{ inputs.build_args }}
