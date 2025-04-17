@@ -101,5 +101,5 @@ runs:
         build-args: |
           GIT_COMMIT=${{ steps.vars.outputs.GIT_COMMIT }}
           ${{ inputs.build_args }}
-        build_contexts: |
+        build-contexts: |
           ${{ inputs.build_contexts }}
