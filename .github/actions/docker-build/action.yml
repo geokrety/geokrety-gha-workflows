@@ -20,6 +20,8 @@ inputs:
     default: .
   build_args:
     type: string
+  build_contexts:
+    type: string
   push:
     type: boolean
     default: true
@@ -52,7 +54,6 @@ runs:
         # list of Docker images to use as base name for tags
         images: |
           ${{ inputs.image_name }}
-          docker.io/${{ inputs.image_name }}
         # generate Docker tags based on the following events/attributes
         tags: |
           type=schedule
@@ -88,8 +89,9 @@ runs:
         push: ${{ github.event_name != 'pull_request' && inputs.push && inputs.dockerhub_token != '' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        outputs: type=image
         load: true
         build-args: |
           GIT_COMMIT=${{ steps.vars.outputs.GIT_COMMIT }}
           ${{ inputs.build_args }}
+        build_contexts: |
+          ${{ inputs.build_contexts }}
