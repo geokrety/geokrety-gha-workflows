@@ -87,7 +87,7 @@ runs:
         push: ${{ github.event_name != 'pull_request' && inputs.push && inputs.dockerhub_token != '' }}
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        output: type=image
+        outputs: type=image
         build-args: |
           GIT_COMMIT=${{ steps.vars.outputs.GIT_COMMIT }}
           ${{ inputs.build_args }}
