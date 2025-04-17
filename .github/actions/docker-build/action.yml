@@ -80,7 +80,7 @@ runs:
         echo "GIT_COMMIT=$(git describe --tags)" >> $GITHUB_OUTPUT
 
     - name: Build and push
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         file: ${{ inputs.dockerfile }}
         context: ${{ inputs.context }}
