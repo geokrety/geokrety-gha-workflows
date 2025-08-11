@@ -37,7 +37,7 @@ jobs:
           # cond2: ${{ inputs.push == 'true' }} false
           # result: ${{ github.event_name != 'pull_request' && inputs.push }}
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
