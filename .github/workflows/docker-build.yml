@@ -44,7 +44,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: geokrety/geokrety-gha-workflows/.github/actions/docker-build@main
+      - uses: geokrety/geokrety-gha-workflows/.github/actions/docker-build@docker-bake-build
         with:
           image_name: ${{ inputs.image_name }}
           dockerhub_username: ${{ inputs.dockerhub_username }}
