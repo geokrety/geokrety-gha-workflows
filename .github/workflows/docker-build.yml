@@ -18,6 +18,9 @@ on:
       push:
         type: boolean
         default: true
+      bake:
+        type: boolean
+        default: false
     secrets:
       dockerhub_token:
         required: true
@@ -49,3 +52,4 @@ jobs:
           dockerfile: ${{ inputs.dockerfile }}
           context: ${{ inputs.context }}
           push: ${{ github.event_name != 'pull_request' && inputs.push }}
+          bake: ${{ inputs.bake }}

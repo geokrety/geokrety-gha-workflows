@@ -25,6 +25,9 @@ inputs:
   push:
     type: boolean
     default: true
+  bake:
+    type: boolean
+    default: false
 
 outputs:
   tag:
@@ -91,6 +94,7 @@ runs:
 
     - name: Build and push
       uses: docker/build-push-action@v6
+      if: inputs.bake == false
       with:
         file: ${{ inputs.dockerfile }}
         context: ${{ inputs.context }}
@@ -103,3 +107,12 @@ runs:
           ${{ inputs.build_args }}
         build-contexts: |
           ${{ inputs.build_contexts }}
+
+    - name: Build and push
+      uses: docker/bake-action@v6
+      if: inputs.bake == true
+      env:
+        GIT_COMMIT: ${{ steps.vars.outputs.GIT_COMMIT }}
+      with:
+        pull: true
+        push: ${{ github.event_name != 'pull_request' && inputs.push && inputs.dockerhub_token != '' }}
