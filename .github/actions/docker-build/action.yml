@@ -108,7 +108,7 @@ runs:
         build-contexts: |
           ${{ inputs.build_contexts }}
 
-    - name: Build and push
+    - name: Bake build and push
       uses: docker/bake-action@v6
       if: ${{ inputs.bake == 'true' }}
       env:
